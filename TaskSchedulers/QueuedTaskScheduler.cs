@@ -52,7 +52,7 @@ namespace System.Threading.Tasks.Schedulers
                 get
                 {
                     List<TaskScheduler> queues = new List<TaskScheduler>();
-                    foreach (var group in _scheduler._queueGroups) queues.AddRange(group.Value);
+                    foreach (var group in _scheduler._queueGroups) queues.AddRange(group.Value.Cast<TaskScheduler>());
                     return queues;
                 }
             }

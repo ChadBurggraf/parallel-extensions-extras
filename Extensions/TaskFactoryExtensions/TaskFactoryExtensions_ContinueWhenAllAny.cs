@@ -35,7 +35,7 @@ namespace System.Threading.Tasks
         public static Task<Task<TAntecedentResult>[]> WhenAll<TAntecedentResult>(
             this TaskFactory factory, params Task<TAntecedentResult>[] tasks)
         {
-            return factory.ContinueWhenAll(tasks, completedTasks => completedTasks);
+            return factory.ContinueWhenAll(tasks, completedTasks => completedTasks) as Task<Task<TAntecedentResult>[]>;
         }
 
         /// <summary>

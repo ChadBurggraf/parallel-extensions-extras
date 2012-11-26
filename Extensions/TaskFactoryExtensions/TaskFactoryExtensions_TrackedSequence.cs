@@ -7,6 +7,7 @@
 //--------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace System.Threading.Tasks
 {
@@ -22,7 +23,7 @@ namespace System.Threading.Tasks
         public static Task<IList<Task>> TrackedSequence(this TaskFactory factory, params Func<Task> [] functions)
         {
             var tcs = new TaskCompletionSource<IList<Task>>();
-            factory.Iterate(TrackedSequenceInternal(functions, tcs));
+            factory.Iterate(TrackedSequenceInternal(functions, tcs).Cast<object>());
             return tcs.Task;
         }
 

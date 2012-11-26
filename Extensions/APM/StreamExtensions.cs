@@ -7,6 +7,7 @@
 //--------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace System.IO
@@ -79,7 +80,7 @@ namespace System.IO
             // Read from the stream over and over, handing the buffers off to the bufferAvailable delegate
             // as they're available.  Delegate invocation will be serialized.
             return Task.Factory.Iterate(
-                ReadIterator(stream, bufferSize, bufferAvailable));
+                ReadIterator(stream, bufferSize, bufferAvailable).Cast<object>());
         }
 
         /// <summary>
@@ -143,7 +144,7 @@ namespace System.IO
             if (source == null) throw new ArgumentNullException("source");
             if (destination == null) throw new ArgumentNullException("destination");
             return Task.Factory.Iterate(
-                CopyStreamIterator(source, destination));
+                CopyStreamIterator(source, destination).Cast<object>());
         }
 
         /// <summary>

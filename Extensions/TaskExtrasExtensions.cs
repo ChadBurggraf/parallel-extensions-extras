@@ -7,7 +7,9 @@
 //--------------------------------------------------------------------------
 
 using System.Linq;
+#if !MONOTOUCH
 using System.Windows.Threading;
+#endif
 
 namespace System.Threading.Tasks
 {
@@ -277,6 +279,8 @@ namespace System.Threading.Tasks
         #endregion
 
         #region Waiting
+
+#if !MONOTOUCH
         /// <summary>Waits for the task to complete execution, pumping in the meantime.</summary>
         /// <param name="task">The task for which to wait.</param>
         /// <remarks>This method is intended for usage with Windows Presentation Foundation.</remarks>
@@ -288,6 +292,7 @@ namespace System.Threading.Tasks
             Dispatcher.PushFrame(nestedFrame);
             task.Wait();
         }
+#endif
 
         /// <summary>Waits for the task to complete execution, returning the task's final status.</summary>
         /// <param name="task">The task for which to wait.</param>

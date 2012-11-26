@@ -225,6 +225,7 @@ namespace System.Threading.Tasks
             return new AsyncCall<T>(functionHandler, maxDegreeOfParallelism, scheduler);
         }
 
+#if !MONOTOUCH
         /// <summary>Initializes the AsyncCall in the specified AppDomain with an action to execute for each element.</summary>
         /// <param name="actionHandler">The action to run for every posted item.</param>
         /// <param name="maxDegreeOfParallelism">The maximum degree of parallelism to use.  If not specified, 1 is used for serial execution.</param>
@@ -252,5 +253,6 @@ namespace System.Threading.Tasks
                 new object[] { functionHandler, maxDegreeOfParallelism, null },
                 null, null);
         }
+#endif
     }
 }
