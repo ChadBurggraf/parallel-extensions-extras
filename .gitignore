@@ -1,4 +1,6 @@
 [Bb]in/
 [Oo]bj/
+.DS_Store
+._.DS_Store
 *.csproj.user
 *.suo
