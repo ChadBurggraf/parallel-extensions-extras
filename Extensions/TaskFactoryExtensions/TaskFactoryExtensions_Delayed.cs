@@ -45,7 +45,16 @@ namespace System.Threading.Tasks
             var timer = new Timer(self =>
             {
                 // Clean up both the cancellation token and the timer, and try to transition to completed
-                ctr.Dispose();
+                try
+                {
+                    ctr.Dispose();
+                }
+                catch (NullReferenceException)
+                {
+                    // Eat this. Mono throws a NullReferenceException when constructed with
+                    // default(CancellationTokenRegistration);
+                }
+
                 ((Timer)self).Dispose();
                 tcs.TrySetResult(null);
             });
